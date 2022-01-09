@@ -25,7 +25,7 @@ const Home: NextPage = () => {
 
     const results = await fetch(`/api/channel?minViewers=${rouletteState.minViewers}`)
     console.log(results);
-    const resultsJson : Data = await results.json();
+    const resultsJson: Data = await results.json();
     console.log(resultsJson);
     setRouletteState({
       ...rouletteState,
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-      {/* a form asking the user to fill out how many viewers should be the minium viewership */}
+        {/* a form asking the user to fill out how many viewers should be the minium viewership */}
         <form className={styles.form} onSubmit={handleSubmit}>
           <h1>Software and Game Development stream roulette</h1>
           <label className={styles.label} htmlFor="min_viewers" >
@@ -60,21 +60,24 @@ const Home: NextPage = () => {
         {rouletteState.results.title && (
           <div className={styles.results}>
             <h2>Results</h2>
-              <div  key={rouletteState.results.id}>
+            <div key={rouletteState.results.id}>
+              {rouletteState.results.thumbnail_url && (
                 <Image
                   src={rouletteState.results.thumbnail_url.replace('{width}', '320').replace('{height}', '180')}
                   alt={rouletteState.results.title}
                   width="320"
                   height="180"
-                />
-                <div>
-                  <h3>{rouletteState.results.title}</h3>
-                  <p>{rouletteState.results.viewer_count} viewers</p>
-                  <h3>Copy raid command</h3>
-                  <pre onClick={() => {navigator.clipboard.writeText(`/raid ${rouletteState.results.user_login}`)}}>/raid {rouletteState.results.user_login}</pre>
-                  <iframe src={rouletteState.results.stream_url} className={styles.stream}></iframe>
-                </div>
+                />)
+              }
+
+              <div>
+                <h3>{rouletteState.results.title}</h3>
+                <p>{rouletteState.results.viewer_count} viewers</p>
+                <h3>Copy raid command</h3>
+                <pre onClick={() => { navigator.clipboard.writeText(`/raid ${rouletteState.results.user_login}`) }}>/raid {rouletteState.results.user_login}</pre>
+                <iframe src={rouletteState.results.stream_url} className={styles.stream}></iframe>
               </div>
+            </div>
           </div>
         )}
 
