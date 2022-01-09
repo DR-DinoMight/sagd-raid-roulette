@@ -58,8 +58,10 @@ export default async function handler(
         });
     }
 
-
-    stream.stream_url = `https://player.twitch.tv/?channel=${stream.user_login}&parent=localhost`;
+    // Get the current hostname and remove any port from the hostname
+    const hostname = req.headers.host ?? '';
+    const hostnameWithoutPort = hostname.split(':')[0];
+    stream.stream_url = `https://player.twitch.tv/?channel=${stream.user_login}&parent=${hostnameWithoutPort}`;
 
     res.status(200).json(stream);
 }
