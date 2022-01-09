@@ -3,13 +3,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
+import { Data } from './api/channel'
 
 // Add state for minViewers, channel, and roulette results
 const Home: NextPage = () => {
   const [rouletteState, setRouletteState] = useState({
-    minViewers: 0,
+    minViewers: '0',
     channel: '',
-    results: {},
+    results: {} as Data,
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
 
     const results = await fetch(`/api/channel?minViewers=${rouletteState.minViewers}`)
     console.log(results);
-    const resultsJson = await results.json();
+    const resultsJson : Data = await results.json();
     console.log(resultsJson);
     setRouletteState({
       ...rouletteState,

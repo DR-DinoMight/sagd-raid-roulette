@@ -1,17 +1,19 @@
 import { request } from 'http';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type Data = {
-    user_id: string;
-    user_login: string;
-    user_name: string;
-    game_name: string;
-    title: string;
-    viewer_count: number;
-    started_at: string;
-    thumbnail_url: string;
-    is_mature: boolean;
-    stream_url: string;
+export type Data = {
+    id?: string;
+    user_id?: string;
+    user_login?: string;
+    user_name?: string;
+    game_name?: string;
+    title?: string;
+    viewer_count?: number;
+    started_at?: string;
+    thumbnail_url?: string;
+    is_mature?: boolean;
+    stream_url?: string;
+    error?: string;
 };
 
 //type for request params
@@ -46,7 +48,7 @@ export default async function handler(
     // Search the data results for a stream with viewer_count less than or equal to minViewers and get a random stream
 
     let stream : Data = data.data.filter(
-        (stream) => parseInt(stream.viewer_count) <= parseInt(minViewers)
+        (stream: { viewer_count: string; }) => parseInt(stream.viewer_count) <= parseInt(minViewers)
     )[Math.floor(Math.random() * data.data.length)];
 
     // If no stream is found, return an error
