@@ -92,3 +92,22 @@
   z-index: -1;
   opacity: 0.8;
 }
+
+
+.joinStream {
+  /* center in screen and large font */
+  text-align: center;
+  color: #9030FF;
+  font-weight: bold;
+  margin: 0 0 1em 0;
+  cursor: pointer;
+}
+/* add hover and active style to joinStream */
+.joinStream:hover {
+  color: #A970FF;
+  cursor: pointer;
+}
+.joinStream:active {
+  color: #451093;
+  cursor: pointer;
+}

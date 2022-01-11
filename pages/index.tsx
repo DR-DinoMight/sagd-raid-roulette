@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 import { Data } from './api/channel'
@@ -73,6 +74,7 @@ const Home: NextPage = () => {
               <div>
                 <h3>{rouletteState.results.title}</h3>
                 <p>{rouletteState.results.viewer_count} viewers</p>
+                <a className={styles.joinStream} href="{rouletteState.results.stream_url ?? ''}" target="_blank">Join Stream</a>
                 <h3>Copy raid command</h3>
                 <pre onClick={() => { navigator.clipboard.writeText(`/raid ${rouletteState.results.user_login}`) }}>/raid {rouletteState.results.user_login}</pre>
                 <iframe src={rouletteState.results.stream_url} className={styles.stream}></iframe>
